@@ -170,6 +170,28 @@
     "restoringTeam": "Restoring your team…",
     "restoreTeam": "Restore team ({{count}})"
   },
+  "hireSummary": {
+    "label": "Hire summary",
+    "name": "Name",
+    "role": "Role",
+    "folder": "Folder",
+    "engine": "Engine",
+    "mailbox": "Mailbox",
+    "connection": "Connection",
+    "starterJobs": "Starter jobs",
+    "firstTask": "First task",
+    "notSet": "Not set",
+    "none": "None"
+  },
+  "capabilitiesSummary": {
+    "label": "Capabilities summary",
+    "email": "Email",
+    "connections": "Connections",
+    "schedules": "Schedules",
+    "notConnected": "Not connected",
+    "active": "{{count}} active",
+    "restartNeeded": "Restart needed for the latest access change."
+  },
   "sidebar": {
     "terminal": "Work",
     "git": "Git",

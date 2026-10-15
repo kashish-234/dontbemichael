@@ -19,6 +19,28 @@
     "add": "添加",
     "clear": "清除"
   },
+  "hireSummary": {
+    "label": "招聘摘要",
+    "name": "名称",
+    "role": "职位",
+    "folder": "文件夹",
+    "engine": "引擎",
+    "mailbox": "邮箱",
+    "connection": "连接",
+    "starterJobs": "初始任务",
+    "firstTask": "第一项任务",
+    "notSet": "未设置",
+    "none": "无"
+  },
+  "capabilitiesSummary": {
+    "label": "能力摘要",
+    "email": "邮箱",
+    "connections": "连接",
+    "schedules": "计划",
+    "notConnected": "未连接",
+    "active": "已启用 {{count}} 项",
+    "restartNeeded": "最新访问更改需要重启。"
+  },
   "commandBar": {
     "free": "自由",
     "skill": "/技能",

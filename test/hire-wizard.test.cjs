@@ -88,17 +88,98 @@ test('main checks with Haiku and no tools, and falls back to the rules', () => {
 });
 
 test('every wizard string exists in all three languages, without dashes', () => {
-  const keys = [...new Set([...modal.matchAll(/'addAgent\.wizard\.([a-zA-Z.]+)'/g)].map((m) => m[1]))];
+  const keys = [
+    ...new Set(
+      [...modal.matchAll(/'addAgent\.wizard\.([a-zA-Z.]+)'/g)]
+        .map((m) => m[1])
+    )
+  ];
+
   for (const loc of ['en', 'zh-CN', 'ar']) {
-    const w = JSON.parse(read(`src/renderer/src/i18n/locales/${loc}.json`)).addAgent.wizard;
+    const w = JSON.parse(
+      read(`src/renderer/src/i18n/locales/${loc}.json`)
+    ).addAgent.wizard;
+
     for (const k of keys) {
       const v = k.split('.').reduce((o, p) => o?.[p], w);
-      assert.equal(typeof v, 'string', `${loc}: wizard.${k}`);
-      assert.doesNotMatch(v, /[–—]| - /, `${loc}: wizard.${k} has a dash`);
+
+      assert.equal(
+        typeof v,
+        'string',
+        `${loc}: wizard.${k}`
+      );
+
+      assert.doesNotMatch(
+        v,
+        /[–—]| - /,
+        `${loc}: wizard.${k} has a dash`
+      );
     }
-    for (const s of ['who', 'job', 'role', 'setup']) assert.ok(w.step[s] && w.stepHint[s], `${loc}: step ${s}`);
+
+    for (const s of ['who', 'job', 'role', 'setup']) {
+      assert.ok(
+        w.step[s] && w.stepHint[s],
+        `${loc}: step ${s}`
+      );
+    }
   }
 });
+
+test('hire and capabilities summary keys exist in every supported locale', () => {
+  for (const loc of ['en', 'zh-CN', 'ar']) {
+    const translations = JSON.parse(
+      read(`src/renderer/src/i18n/locales/${loc}.json`)
+    );
+
+    for (const key of [
+      'label',
+      'name',
+      'role',
+      'folder',
+      'engine',
+      'mailbox',
+      'connection',
+      'starterJobs',
+      'firstTask',
+      'notSet',
+      'none'
+    ]) {
+      assert.equal(
+        typeof translations.hireSummary?.[key],
+        'string',
+        `${loc}: hireSummary.${key}`
+      );
+    }
+
+    for (const key of [
+      'label',
+      'email',
+      'connections',
+      'schedules',
+      'notConnected',
+      'active',
+      'restartNeeded'
+    ]) {
+      assert.equal(
+        typeof translations.capabilitiesSummary?.[key],
+        'string',
+        `${loc}: capabilitiesSummary.${key}`
+      );
+    }
+
+    assert.doesNotMatch(
+      JSON.stringify(translations.hireSummary),
+      /[–—]| - /
+    );
+
+    assert.doesNotMatch(
+      JSON.stringify(translations.capabilitiesSummary),
+      /[–—]| - /
+    );
+  }
+});
+
+
 
 test('the model list starts on the default for agents from Settings, marked default', () => {
   assert.match(modal, /const defaultModel = isClaudeProvider\(provider\) \? config\.defaultModel : config\.providerDefaultModels\?\.\[provider\];/);

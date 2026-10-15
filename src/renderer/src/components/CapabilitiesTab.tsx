@@ -16,6 +16,7 @@ import { useResolvedGodName } from '@/hooks/useResolvedGodName';
 import { InfoTip } from './InfoTip';
 import { SHOW_MAILBOXES } from '@shared/buildFeatures';
 import { useResearchName } from '@/shell/research';
+import { CapabilitiesSummary } from './CapabilitiesSummary';
 
 type SectionKey = 'email' | 'connectors' | 'schedules';
 
@@ -224,6 +225,19 @@ export function CapabilitiesTab({ agent }: { agent: Agent }) {
     <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: 14 }}>
       <div style={{ maxWidth: '72ch' }}>
         <div style={hint}>{t('capabilities.intro', { name })}</div>
+        <CapabilitiesSummary
+          emailLabel={
+            current
+              ? addressOf(current)
+              : sendFrom
+                ? `Send only from ${addressOf(sendFrom.mailbox)}`
+                : t('capabilitiesSummary.notConnected')
+          }
+          connectorCount={granted}
+          connectorTotal={connectors.length}
+          schedulesOn={schedulesOn}
+          pendingRestart={!!pending}
+        />
 
         <div style={{ height: 8 }} />
         {/* Email: hidden in this build when SHOW_MAILBOXES is off. */}

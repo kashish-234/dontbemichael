@@ -60,6 +60,7 @@ import { useResolvedGodName } from '@/hooks/useResolvedGodName';
 import { SHOW_IMPORT_HIRE, SHOW_ENGINE_PICKER, SHOW_MAILBOXES } from '@shared/buildFeatures';
 import { seedStarterJobs } from '@/shell/seedStarterJobs';
 import { sendTypedFirstTask } from '@/shell/typedFirstTask';
+import { HireSummary } from './HireSummary';
 
 const ACCENTS: AccentColorName[] = ['coral', 'mint', 'sky', 'lemon', 'lilac', 'peach'];
 
@@ -117,6 +118,8 @@ const joinPath = (root: string, name: string) => `${root.replace(/[\\/]+$/, '')}
 function safeFolder(raw: string): string {
   return raw.replace(/[\\/:*?"<>|\u0000-\u001f]+/g, '-').replace(/^[.\s-]+/, '').replace(/[.\s]+$/, '').trim().slice(0, 60);
 }
+
+
 
 const TOPIC_MAX = 120;
 
@@ -1116,6 +1119,22 @@ export function AddAgentModal({ onClose, config, onConfigChange }: AddAgentModal
                   <div style={{ fontSize: 12.5, color: 'var(--cth-ink-3)' }}>{title.trim()}</div>
                 </div>
               </div>
+
+              <HireSummary
+                name={name.trim()}
+                role={title.trim()}
+                folder={cwd}
+                provider={provider}
+                model={model}
+                mailbox={
+                  binding?.mailboxId
+                    ? mailboxAddress(binding.mailboxId)
+                    : undefined
+                }
+                connector={binding?.connectorKey}
+                starterJobs={sourceCard ? 1 : 0}
+                firstTask={firstTaskSection(workStyle)?.body.trim()}
+              />
 
               <Row label={tr('addAgent.workStyle')} info={tr('addAgent.wizard.workStyleIntro', { name: name.trim(), godName })}>
                 <textarea

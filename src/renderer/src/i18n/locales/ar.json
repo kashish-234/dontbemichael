@@ -19,6 +19,28 @@
     "add": "إضافة",
     "clear": "مسح"
   },
+  "hireSummary": {
+    "label": "ملخص التوظيف",
+    "name": "الاسم",
+    "role": "الدور",
+    "folder": "المجلد",
+    "engine": "المحرك",
+    "mailbox": "صندوق البريد",
+    "connection": "الاتصال",
+    "starterJobs": "المهام الأولية",
+    "firstTask": "المهمة الأولى",
+    "notSet": "غير مضبوط",
+    "none": "لا يوجد"
+  },
+  "capabilitiesSummary": {
+    "label": "ملخص القدرات",
+    "email": "البريد الإلكتروني",
+    "connections": "الاتصالات",
+    "schedules": "الجداول",
+    "notConnected": "غير متصل",
+    "active": "{{count}} نشطة",
+    "restartNeeded": "يلزم إعادة التشغيل لتطبيق أحدث تغيير في الوصول."
+  },
   "commandBar": {
     "free": "حر",
     "skill": "/مهارة",
